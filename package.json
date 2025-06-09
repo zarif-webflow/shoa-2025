@@ -1,6 +1,6 @@
 {
-  "name": "z-wf-starter",
-  "description": "Starter template that I use for all my Webflow projects.",
+  "name": "shoa-2025",
+  "description": "Custom code repo for the Shoa 2025 project.",
   "license": "ISC",
   "keywords": [],
   "type": "module",
@@ -9,6 +9,7 @@
   "files": [
     "dist"
   ],
+  "homepage": "https://shoa2025.webflow.io",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node ./bin/build.js",
     "build": "cross-env NODE_ENV=production node ./bin/build.js",
