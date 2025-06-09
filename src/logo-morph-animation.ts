@@ -1,5 +1,3 @@
-import "./logo-morph-animation.css";
-
 import { afterWebflowReady, getGsap, getHtmlElement } from "@taj-wf/utils";
 
 const SELECTORS = {
