@@ -11,6 +11,9 @@ importers:
       '@finsweet/ts-utils':
         specifier: ^0.40.0
         version: 0.40.0
+      '@taj-wf/utils':
+        specifier: ^1.1.1
+        version: 1.1.1
     devDependencies:
       '@eslint/js':
         specifier: ^9.19.0
@@ -494,6 +497,10 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  '@taj-wf/utils@1.1.1':
+    resolution: {integrity: sha512-6tnvnoYnCQ/jYHvPv+drqP2GPiUCXKPE7mrbwQDGCChz3lqszEmcBji3so6cLXvH4/nfNWmPp/AxdVum+IFtYw==}
+    engines: {pnpm: '>=10'}
+
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
 
@@ -939,6 +946,9 @@ packages:
 
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
+
+  gsap@3.13.0:
+    resolution: {integrity: sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==}
 
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
@@ -1852,6 +1862,11 @@ snapshots:
     dependencies:
       playwright: 1.50.1
 
+  '@taj-wf/utils@1.1.1':
+    dependencies:
+      '@finsweet/ts-utils': 0.40.0
+      gsap: 3.13.0
+
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
   '@types/estree@1.0.6': {}
@@ -2343,6 +2358,8 @@ snapshots:
   globals@14.0.0: {}
 
   graphemer@1.4.0: {}
+
+  gsap@3.13.0: {}
 
   has-flag@4.0.0: {}
 
