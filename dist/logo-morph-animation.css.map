@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/logo-morph-animation.css"],
+  "sourcesContent": ["[data-hero-logo]:not([data-initialized]) {\r\n  visibility: hidden;\r\n}\r\n"],
+  "mappings": ";AAAA,CAAC,eAAe,KAAK,CAAC;AACpB,cAAY;AACd;",
+  "names": []
+}

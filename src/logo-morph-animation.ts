@@ -1,8 +1,11 @@
+import "./logo-morph-animation.css";
+
 import { afterWebflowReady, getGsap, getHtmlElement } from "@taj-wf/utils";
 
 const SELECTORS = {
   navLogo: "[data-nav-logo]",
   heroLogo: "[data-hero-logo]",
+  heroLogoParent: "[data-hero-logo-parent]",
 } as const;
 
 const ATTRIBUTES = {
@@ -27,74 +30,60 @@ const initLogoMorphAnimation = () => {
 
   const navLogo = getHtmlElement({ selector: SELECTORS.navLogo, log: "error" });
   const heroLogo = getHtmlElement({ selector: SELECTORS.heroLogo, log: "error" });
+  const heroLogoParent = getHtmlElement({
+    selector: SELECTORS.heroLogoParent,
+    log: "error",
+  });
 
-  if (!navLogo || !heroLogo) return;
+  if (!navLogo || !heroLogo || !heroLogoParent) return;
 
-  const navFlipId = navLogo.getAttribute(ATTRIBUTES.flipId)?.trim();
-  const heroFlipId = heroLogo.getAttribute(ATTRIBUTES.flipId)?.trim();
-
-  if (!navFlipId || !heroFlipId || navFlipId !== heroFlipId) {
-    console.error(
-      `Nav and hero logos must have the same flip ID with ${ATTRIBUTES.flipId} for morphing to work.`,
-      "\n",
-      "\n",
-      "Hero Logo:",
-      heroLogo,
-      "\n",
-      "Nav Logo:",
-      navLogo
-    );
-    return;
-  }
+  navLogo.setAttribute(ATTRIBUTES.flipId, "logo-morph");
+  heroLogo.setAttribute(ATTRIBUTES.flipId, "logo-morph");
 
   gsap.registerPlugin(Flip);
-
-  let currentState: "hero" | "nav" = "hero";
-
-  const tempTrigger = document.querySelector(".hero-right");
 
   const morphHeroLogoToNavLogo = () => {
     const flipState = Flip.getState([navLogo, heroLogo]);
 
-    heroLogo.style.display = "none";
-    navLogo.style.removeProperty("display");
+    heroLogo.classList.add("is-hidden");
+    navLogo.classList.remove("is-hidden");
 
     Flip.from(flipState, {
       duration: 1,
       ease: "power3.inOut",
       absolute: true,
     });
-
-    currentState = "nav";
   };
 
   const morphNavLogoToHeroLogo = () => {
     const flipState = Flip.getState([navLogo, heroLogo]);
 
-    navLogo.style.display = "none";
-    heroLogo.style.removeProperty("display");
+    navLogo.classList.add("is-hidden");
+    heroLogo.classList.remove("is-hidden");
 
     Flip.from(flipState, {
       duration: 1.5,
       ease: "power3.inOut",
       absolute: true,
     });
-
-    currentState = "hero";
   };
-
-  tempTrigger?.addEventListener("click", () => {
-    if (currentState === "hero") {
-      morphHeroLogoToNavLogo();
-      return;
-    }
-    morphNavLogoToHeroLogo();
-  });
 
   navLogo.setAttribute(ATTRIBUTES.initialized, "true");
   heroLogo.setAttribute(ATTRIBUTES.initialized, "true");
 
-  morphNavLogoToHeroLogo();
+  const interSectionObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          morphNavLogoToHeroLogo();
+          return;
+        }
+        morphHeroLogoToNavLogo();
+      }
+    },
+    { threshold: 1 }
+  );
+  interSectionObserver.observe(heroLogoParent);
 };
 
 afterWebflowReady(() => {
