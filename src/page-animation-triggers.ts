@@ -6,8 +6,6 @@ import { preventBodyScroll } from "@zag-js/remove-scroll";
 
 import { isAnchorLoadFromSameWebsite } from "./utils/load-type-getters";
 
-console.log("page transition script called at", Date.now);
-
 // Extend the Window interface to include BarbaInstance
 declare global {
   interface Window {
@@ -15,8 +13,12 @@ declare global {
   }
 }
 
-// Attach barba instance to window object
-window.BarbaInstance = barba;
+const getActiveScript = () => {
+  const currentModuleUrl = import.meta.url;
+  return getHtmlElement<HTMLScriptElement>({
+    selector: `script[src="${currentModuleUrl}"]`,
+  });
+};
 
 const stopScroller = () => {
   // @ts-expect-error smooth scroller type is not defined
@@ -35,6 +37,37 @@ const stopScroller = () => {
 };
 
 const initPageAnimationTriggers = () => {
+  const scriptElement = getActiveScript();
+
+  if (!scriptElement) return;
+
+  const { initialDuration, changeDuration, exitDuration } = scriptElement.dataset;
+
+  const initialDurationValue = Number.parseInt(initialDuration || "");
+  const changeDurationValue = Number.parseInt(changeDuration || "");
+  const exitDurationValue = Number.parseInt(exitDuration || "");
+
+  if (Number.isNaN(initialDurationValue)) {
+    console.error(
+      "data-initial-duration is not provided or invalid in the script tag. Please add a value in ms."
+    );
+    return;
+  }
+
+  if (Number.isNaN(changeDurationValue)) {
+    console.error(
+      "data-change-duration is not provided or invalid in the script tag. Please add a value in ms."
+    );
+    return;
+  }
+
+  if (Number.isNaN(exitDurationValue)) {
+    console.error(
+      "data-exit-duration is not provided or invalid in the script tag. Please add a value in ms."
+    );
+    return;
+  }
+
   const pageInitialLoadTrigger = getHtmlElement({
     selector: ".page-transition_initial-load-trigger",
   });
@@ -44,7 +77,14 @@ const initPageAnimationTriggers = () => {
   const pageChangeTrigger = getHtmlElement({
     selector: ".page-transition_page-change-trigger",
   });
-  if (!pageInitialLoadTrigger || !pageExitTrigger || !pageChangeTrigger) return;
+  const pageWrapper = getHtmlElement({
+    selector: ".page-wrapper",
+  });
+
+  if (!pageInitialLoadTrigger || !pageExitTrigger || !pageChangeTrigger || !pageWrapper) return;
+
+  document.body.setAttribute("data-barba", "wrapper");
+  pageWrapper.setAttribute("data-barba", "container");
 
   barba.init({
     transitions: [
@@ -52,7 +92,7 @@ const initPageAnimationTriggers = () => {
         name: "page-transition",
         leave() {
           pageExitTrigger.click();
-          return wait(1 * 1000);
+          return wait(exitDurationValue);
         },
         // @ts-expect-error barba js no types
         afterLeave({ next }) {
@@ -62,12 +102,12 @@ const initPageAnimationTriggers = () => {
           const enableScroller = stopScroller();
           if (isAnchorLoadFromSameWebsite()) {
             pageChangeTrigger.click();
-            return wait(1 * 1000).then(() => {
+            return wait(changeDurationValue).then(() => {
               enableScroller();
             });
           }
           pageInitialLoadTrigger.click();
-          return wait(5 * 1000).then(() => {
+          return wait(initialDurationValue).then(() => {
             enableScroller();
           });
         },
@@ -75,6 +115,8 @@ const initPageAnimationTriggers = () => {
     ],
   });
 };
+
+window.BarbaInstance = barba;
 
 afterWebflowReady(() => {
   initPageAnimationTriggers();

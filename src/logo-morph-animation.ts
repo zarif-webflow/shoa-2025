@@ -11,6 +11,8 @@ const ATTRIBUTES = {
   flipId: "data-flip-id",
 } as const;
 
+const barbaInstance = window.BarbaInstance;
+
 const initLogoMorphAnimation = () => {
   const [gsap, Flip] = getGsap(["Flip"], "error");
 
@@ -85,5 +87,11 @@ const initLogoMorphAnimation = () => {
 };
 
 afterWebflowReady(() => {
+  if (barbaInstance) {
+    barbaInstance.hooks.afterOnce(() => {
+      initLogoMorphAnimation();
+    });
+    return;
+  }
   initLogoMorphAnimation();
 });
