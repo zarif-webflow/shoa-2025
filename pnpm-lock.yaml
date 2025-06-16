@@ -8,12 +8,18 @@ importers:
 
   .:
     dependencies:
+      '@barba/core':
+        specifier: ^2.10.3
+        version: 2.10.3
       '@finsweet/ts-utils':
         specifier: ^0.40.0
         version: 0.40.0
       '@taj-wf/utils':
         specifier: ^1.1.1
         version: 1.1.1
+      '@zag-js/remove-scroll':
+        specifier: ^1.15.3
+        version: 1.15.3
     devDependencies:
       '@eslint/js':
         specifier: ^9.19.0
@@ -65,6 +71,9 @@ importers:
         version: 8.23.0(eslint@9.19.0(jiti@2.4.2))(typescript@5.7.3)
 
 packages:
+
+  '@barba/core@2.10.3':
+    resolution: {integrity: sha512-ovVeT1wUcdMg8Lu6Iel6yEBW2+s6iA7qfRLCVKTSIfJU9csiawU0UOmVJdcoy3WNOsF2Ur9UfoTUC9aDcm4c0w==}
 
   '@esbuild/aix-ppc64@0.24.2':
     resolution: {integrity: sha512-thpVCb/rhxE/BnMLQ7GReQLLN8q9qbHmI55F4489/ByVg2aQaQ6kbcLb6FHkocZzQhxc4gx0sCk0tJkKBFzDhA==}
@@ -561,6 +570,15 @@ packages:
     resolution: {integrity: sha512-oWWhcWDLwDfu++BGTZcmXWqpwtkwb5o7fxUIGksMQQDSdPW9prsSnfIOZMlsj4vBOSrcnjIUZMiIjODgGosFhQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@zag-js/dom-query@1.15.3':
+    resolution: {integrity: sha512-M9+CjC2kTdKFCfWP7/RhziahqMhrs2AiabPwp2fd3otVFLLDfMkqg6shlPiQL7DNaKz+aUQ778k8Bo+xLDMtlw==}
+
+  '@zag-js/remove-scroll@1.15.3':
+    resolution: {integrity: sha512-K0Krwcl/86lao3/phrFj9p3Z9g088QqsO5e28IynzAHxyTafydDautXB5GvsPT7k65wegrSYNWzy9xyVkodcpA==}
+
+  '@zag-js/types@1.15.3':
+    resolution: {integrity: sha512-XqwYqcMTFrkKkW+fZ3OlXalPa48uy/Qhb0LO7lGBW9vOn6xpwrl9wFT59wkrVmv/hw74WQCrqSWXhe23fj6WuA==}
+
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -1030,6 +1048,9 @@ packages:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
 
+  is-promise@4.0.0:
+    resolution: {integrity: sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==}
+
   is-ssh@1.4.1:
     resolution: {integrity: sha512-JNeu1wQsHjyHgn9NcWTaXq6zWSR6hqE0++zhfZlkFBbScNkyvxCdeV8sRkSBaeLKxmbpR21brail63ACNxJ0Tg==}
 
@@ -1257,6 +1278,9 @@ packages:
   path-key@4.0.0:
     resolution: {integrity: sha512-haREypq7xkM7ErfgIyA0z+Bj4AGKlMSdlQE2jvJo6huWD1EdkKYV+G/T4nq0YEF2vgTT8kqMFKo1uHn950r4SQ==}
     engines: {node: '>=12'}
+
+  path-to-regexp@6.3.0:
+    resolution: {integrity: sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ==}
 
   pathe@2.0.3:
     resolution: {integrity: sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w==}
@@ -1532,6 +1556,11 @@ packages:
     engines: {node: '>=18'}
 
 snapshots:
+
+  '@barba/core@2.10.3':
+    dependencies:
+      is-promise: 4.0.0
+      path-to-regexp: 6.3.0
 
   '@esbuild/aix-ppc64@0.24.2':
     optional: true
@@ -1953,6 +1982,18 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.23.0
       eslint-visitor-keys: 4.2.0
+
+  '@zag-js/dom-query@1.15.3':
+    dependencies:
+      '@zag-js/types': 1.15.3
+
+  '@zag-js/remove-scroll@1.15.3':
+    dependencies:
+      '@zag-js/dom-query': 1.15.3
+
+  '@zag-js/types@1.15.3':
+    dependencies:
+      csstype: 3.1.3
 
   acorn-jsx@5.3.2(acorn@8.14.0):
     dependencies:
@@ -2427,6 +2468,8 @@ snapshots:
 
   is-number@7.0.0: {}
 
+  is-promise@4.0.0: {}
+
   is-ssh@1.4.1:
     dependencies:
       protocols: 2.0.2
@@ -2645,6 +2688,8 @@ snapshots:
   path-key@3.1.1: {}
 
   path-key@4.0.0: {}
+
+  path-to-regexp@6.3.0: {}
 
   pathe@2.0.3: {}
 
