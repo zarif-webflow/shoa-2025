@@ -53,15 +53,6 @@ const initPageAnimationTriggers = () => {
 
   if (!gsap) return;
 
-  const pageInitialLoadTrigger = getHtmlElement({
-    selector: ".page-transition_initial-load-trigger",
-  });
-  const pageExitTrigger = getHtmlElement({
-    selector: ".page-transition_exit-trigger",
-  });
-  const pageChangeTrigger = getHtmlElement({
-    selector: ".page-transition_page-change-trigger",
-  });
   const pageWrapper = getHtmlElement({
     selector: ".page-wrapper",
     log: "error",
@@ -72,14 +63,7 @@ const initPageAnimationTriggers = () => {
     log: "error",
   });
 
-  if (
-    !pageInitialLoadTrigger ||
-    !pageExitTrigger ||
-    !pageChangeTrigger ||
-    !pageWrapper ||
-    !transitionBgEls
-  )
-    return;
+  if (!pageWrapper || !transitionBgEls) return;
 
   document.body.setAttribute("data-barba", "wrapper");
   pageWrapper.setAttribute("data-barba", "container");
