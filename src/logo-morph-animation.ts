@@ -16,17 +16,7 @@ const barbaInstance = window.BarbaInstance;
 const initLogoMorphAnimation = () => {
   const [gsap, Flip] = getGsap(["Flip"], "error");
 
-  if (!gsap) {
-    console.error("GSAP is not available. Please ensure GSAP is loaded before this script.");
-    return;
-  }
-
-  if (!Flip) {
-    console.error(
-      "GSAP Flip plugin is not available. Please ensure it is loaded before this script."
-    );
-    return;
-  }
+  if (!gsap || !Flip) return;
 
   const navLogo = getHtmlElement({ selector: SELECTORS.navLogo, log: "error" });
   const heroLogo = getHtmlElement({ selector: SELECTORS.heroLogo, log: "error" });

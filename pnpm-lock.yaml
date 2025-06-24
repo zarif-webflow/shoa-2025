@@ -15,8 +15,8 @@ importers:
         specifier: ^0.40.0
         version: 0.40.0
       '@taj-wf/utils':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: ^1.2.2
+        version: 1.2.2
       '@zag-js/remove-scroll':
         specifier: ^1.15.3
         version: 1.15.3
@@ -512,8 +512,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@taj-wf/utils@1.1.1':
-    resolution: {integrity: sha512-6tnvnoYnCQ/jYHvPv+drqP2GPiUCXKPE7mrbwQDGCChz3lqszEmcBji3so6cLXvH4/nfNWmPp/AxdVum+IFtYw==}
+  '@taj-wf/utils@1.2.2':
+    resolution: {integrity: sha512-GWxaIwPM8WppeRJgMCkIAtIrZPo7XNLMhDNH6ugwyobBFQ/v5+iWJCsuWCfSkIoLus1X+1Ra5mpYpRZsivLB2w==}
     engines: {pnpm: '>=10'}
 
   '@tootallnate/quickjs-emscripten@0.23.0':
@@ -1909,7 +1909,7 @@ snapshots:
     dependencies:
       playwright: 1.50.1
 
-  '@taj-wf/utils@1.1.1':
+  '@taj-wf/utils@1.2.2':
     dependencies:
       '@finsweet/ts-utils': 0.40.0
       gsap: 3.13.0
